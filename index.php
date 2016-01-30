@@ -2,7 +2,22 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>伟大的航概网主页</title>
+        <title>航概网主页</title>
+       <style>
+          body {
+    color: #8aa4ae;
+    background-image: url("image/main.png");
+    background-attachment: fixed;
+    margin-top: 13%;
+    margin-left: 20%;
+	margin-right: 20%;
+	padding: 50px 50px 50px 50px;
+    text-align: center;
+	font-family: 'Microsoft JhengHei UI';
+    font-size: 50px;
+    font-weight: bold;
+         }	
+       </style>
     </head>
    <body>
   

@@ -2,13 +2,26 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>可爱的航概测试页面</title>
+        <title>航概测试页面</title>
+        <style type="text/css">     
+         body {
+            color: #15075e;
+            background-image: url("image/1.png");
+            background-attachment: fixed;
+            margin-top: 13%;
+            margin-left: 20%;
+	        margin-right: 20%;
+	        padding: 50px 50px 50px 50px;           
+	        font-family: 楷体;
+            font-size: 30px;
+         }	
+       </style>
     </head>
     <body>
-<h2>来愉快的测试航概吧 &#10084</h2>     
+<h2>来测试航概吧 &#10084</h2>     
 <?php
 
-//经左顾问改良了的无敌函数 随机选题号不重复，且使题号对应分数相加为定值
+//经左同学改良的函数 随机选题号不重复，且使题号对应分数相加为定值
 function MyRand($min, $max, $num, $score, $scores)
 {
     $tag[1]=$num*2-$score;

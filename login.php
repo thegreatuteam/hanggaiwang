@@ -36,12 +36,12 @@
         }
         else {
           // 用户学号或密码错误，显示错误信息
-          $error_msg = '--对不起，你的学号或密码不对呢...--';
+          $error_msg = '对不起，你的学号或密码不对呢...';
         }
       }
       else {
         // 用户未输入学号或密码，显示错误信息
-        $error_msg = '--对不起，请输入你的学号和密码才可以登录哦~--';
+        $error_msg = '对不起，学号和密码不能为空哦~';
       }
     }
   }
@@ -52,6 +52,21 @@
     <head>
         <meta charset="utf-8" />
         <title>航概网登录界面</title>
+       <style>
+          body {
+    color: #8aa4ae;
+    background-image: url("image/main.png");
+    background-attachment: fixed;
+    margin-top: 10%;
+    margin-left: 20%;
+	margin-right: 20%;
+	padding: 50px 50px 50px 50px;
+    text-align: center;
+	font-family: 'Microsoft JhengHei UI';
+    font-size: 40px;
+    font-weight: bold;
+         }	
+       </style>
     </head>
     <body>
     <h3>登录</h3>
@@ -71,6 +86,8 @@
    
     <input type="submit" value="登录" name="submit" />
   </form>
+
+  <p><a href="index.php">返回主页</a><br/></p>
 
 <?php
   }
