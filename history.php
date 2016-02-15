@@ -1,45 +1,32 @@
 <?php
 //连接数据库
-require_once('connectvars.php');
+require 'connectvars.php';
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 //ErrorHandler
-if(!$dbc) {
-  die('Could not connect: '.mysqli_connect_error().'!');
+if (!$dbc) {
+    die('Could not connect: '.mysqli_connect_error().'!');
 }
 
-//以下获取题号的功能是李嘉锟编写的哟~
 $user_number = $_COOKIE['user_number'];
 $dbt_name="user".$user_number;
 $id=$_POST['historyid'];
 
-$result=mysqli_query($dbc,"SELECT * FROM $dbt_name WHERE id='$id' ");
+$result=mysqli_query($dbc, "SELECT * FROM $dbt_name WHERE id='$id' ");
 while ($row=mysqli_fetch_array($result)) {
     $number=$row['number'];
-    $times=strlen($number)/2;
-    for ($i=1;$i<=$times;$i++) {
-        echo $i.".";//输出序号
-        $left=strpos($number,"!");
-        $right=strpos(substr($number,strpos($number,"!")+1),"!");
-            if ($right) {
-            $tihao=substr($number,strpos($number,"!")+1,$right-$left);    //获取题号       
-            //输出对应题与答案
-            $query2 = "SELECT * FROM tests WHERE id='$tihao'";
-            $result2 = mysqli_query($dbc, $query2);
-            $a_test=mysqli_fetch_array($result2);
-            echo $a_test['question'].'<br/>';      
-            echo '正确答案：'.$a_test['answer'].'<br/>';        
-      
-        }
-        else {
-            $tihao=substr($number,strpos($number,"!")+1);    //获取题号      
-            $query2 = "SELECT * FROM tests WHERE id='$tihao'";
-            $result2 = mysqli_query($dbc, $query2);
-            $a_test=mysqli_fetch_array($result2);
-            echo $a_test['question'].'<br/>';      
-            echo '正确答案：'.$a_test['answer'].'<br/>';
-        }
-        $number=substr($number,strpos($number,"!")+1+$right-$left);
-        
+    $sytihao=explode("!", $number); 
+
+    $geshu=count($sytihao);  
+    for ($i=1;$i<$geshu;$i++) {
+        echo ($i.".");//输出序号    
+        //输出对应题与答案
+        $tihao=$sytihao[$i];       
+        $tihao=intval($tihao);
+        $query2 = "SELECT * FROM tests WHERE id='$tihao'";
+        $result2 = mysqli_query($dbc, $query2);
+        $a_test=mysqli_fetch_array($result2);
+        echo $a_test['question'].'<br/>';      
+        echo '正确答案：'.$a_test['answer'].'<br/>';              
     }
 }
 
@@ -59,3 +46,4 @@ echo('<a href="index.php">返回主页</a>');
         
     </body>
 </html>
+

@@ -23,12 +23,13 @@
       <h3>注册</h3>
 
 <?php
-  require_once('connectvars.php');
+    
+require 'connectvars.php';
 
-  // 连接数据库
-  $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+// 连接数据库
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-  if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     // 从表单获取注册数据
     $user_number = mysqli_real_escape_string($dbc, trim($_POST['number']));
     $password1 = mysqli_real_escape_string($dbc, trim($_POST['password1']));
@@ -47,13 +48,13 @@
         echo '<p class="error">--请保证两次密码填写一致！--</p>';
     }
     //确保学号为8位数字--即保证是北航学号啦~ 用正则表达式判断
-    if(!preg_match('/^\d{8}$/',$user_number)){
+    if (!preg_match('/^\d{8}$/', $user_number)) {
         $okregister='0'; 
         echo '<p class="error">--请输入有效的学号，8位数字哟！--</p>'; 
         $user_number = "";
     }
      //确保密码为6-12位且仅由数字或字母组成 用正则表达式判断
-    if(!preg_match('/^\w{6,12}$/',$password1)){
+    if (!preg_match('/^\w{6,12}$/', $password1)) {
         $okregister='0'; 
         echo '<p class="error">--请确保密码为6-12位且仅由数字或字母组成--</p>'; 
         $password1="";
@@ -69,7 +70,7 @@
     }
  
     //最终，若$okregister值为1（即PHP判定用户数据合理）,则 将注册数据插入数据库表
-    if($okregister=='1'){
+    if ($okregister=='1') {
         $query = "INSERT INTO users (user_number, password, join_date) VALUES ('$user_number', SHA('$password1'), NOW())";
         mysqli_query($dbc, $query);
 
@@ -81,15 +82,15 @@
         score text,
         number text
         )";
-        mysqli_query($dbc,$sql);
+        mysqli_query($dbc, $sql);
         
         // 向用户证实已成功注册
         echo '<p>--恭喜'.$user_number.'~ 你已经注册成功~<br/>现在请<a href="login.php">登录</a>吧。--</p>';
 
         mysqli_close($dbc);
         exit();
-      }
-  }
+    }
+}
   mysqli_close($dbc);
 ?>
 
